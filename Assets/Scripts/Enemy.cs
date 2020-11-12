@@ -62,6 +62,8 @@ public class Enemy : Character
         transform.position = pos;
         Setup(pos + healthOffset);
         gameObject.SetActive(true);
+        healthBar.SetHealth(maxHealth);
+        healthBar.gameObject.SetActive(true);
     }
 
     public override void Die()

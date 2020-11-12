@@ -56,9 +56,9 @@ MonoBehaviour:
   damage: 25
   maxHealth: 50
   isDead: 0
-  attackRange: 2.5
+  attackRange: 3.5
   attackSpeed: 1
-  escapeRadius: 8
+  escapeRadius: 15
   finder: {fileID: 1747182266774079127}
   target: {fileID: 1747182266774079126}
 --- !u!61 &1747182267465568967
@@ -128,7 +128,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.06, y: -0.19}
   serializedVersion: 2
-  m_Radius: 5.5
+  m_Radius: 11
 --- !u!114 &1747182266774079126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 2
+  maxSpeed: 4
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -172,9 +172,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 2.5
+  slowdownDistance: 3.7
   pickNextWaypointDist: 2
-  endReachedDistance: 2.3
+  endReachedDistance: 3.3
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0

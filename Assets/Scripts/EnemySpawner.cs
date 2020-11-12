@@ -6,16 +6,19 @@ using UnityEngine;
 class EnemySpawner: MonoBehaviour
 {
     [SerializeField] Enemy enemyPref;
+    [SerializeField] Vector2 maxSpawnVec;
 
-    private int maxSpawns = 7;
-    private float maxSpawnRadius = 3f;
+    private int maxNumEnemies;
 
-    List<Enemy> enemies = new List<Enemy>(16);
-    List<Vector2> spawns = new List<Vector2>(16);
-    private void Start()
+    List<Enemy> enemies;
+    List<Vector2> spawns;
+    public void Setup(int maxNumEnemies)
     {
+        this.maxNumEnemies = maxNumEnemies;
+        enemies = new List<Enemy>(maxNumEnemies);
+        spawns = new List<Vector2>(maxNumEnemies);
         Random.InitState(System.DateTime.Now.Second);
-        for (int i = 0; i < maxSpawns; i++)
+        for (int i = 0; i < maxNumEnemies; i++)
         {
             Vector2 spawnPoint = RandomSpawnPoint();
             spawns.Add(spawnPoint);
@@ -29,8 +32,8 @@ class EnemySpawner: MonoBehaviour
     private Vector2 RandomSpawnPoint()
     {
         Vector2 spawnerPos = gameObject.transform.position;
-        spawnerPos.x += Random.Range(-maxSpawnRadius, maxSpawnRadius);
-        spawnerPos.y += Random.Range(-maxSpawnRadius, maxSpawnRadius);
+        spawnerPos.x += Random.Range(-maxSpawnVec.x, maxSpawnVec.x);
+        spawnerPos.y += Random.Range(-maxSpawnVec.y, maxSpawnVec.y);
         return spawnerPos;
     }
 
@@ -51,7 +54,7 @@ class EnemySpawner: MonoBehaviour
         
         for(int i = 0; i < enemies.Count; i++)
         {
-            if (!enemies[i].isActiveAndEnabled /*&& Random.Range(0, 3) == 1*/)
+            if (!enemies[i].isActiveAndEnabled && Random.Range(0, 3) == 1)
             {
                 enemies[i].Revive(spawns[i]);
             }

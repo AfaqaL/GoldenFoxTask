@@ -11,23 +11,20 @@ public class FollowCamera : MonoBehaviour
     };
 
     [SerializeField] Transform target;
-    [SerializeField] Vector2 freelookLimit;
+    [SerializeField] Transform mapTopLeft;
+    [SerializeField] Transform mapBottomRight;
     [SerializeField] Tilemap map;
+    [SerializeField] Camera camera;
 
     private CameraState followState = CameraState.Follow;
-    private float cameraSpeed = 15f;
-    private float edgeThickness = 5f;
+    private float cameraSpeed = 25f;
+    private float edgeThickness = 10f;
+    private float zoomVal = 0.5f;
+    private float minZoom = 1.5f, maxZoom = 20f;
     
-    private Vector2 center;
-    private Vector2 edges;
-
-    [SerializeField] Camera camera;
-    private float zoomVal = 0.4f;
-    private float minZoom = 1f, maxZoom = 11f;
     private void Start()
     {
-        center = map.localBounds.center;
-        edges = map.localBounds.extents;
+        
     }
     private void SwitchFollowState()
     {
@@ -88,8 +85,8 @@ public class FollowCamera : MonoBehaviour
             cameraPos.y += cameraSpeed * Time.deltaTime;
         }
 
-        cameraPos.x = Mathf.Clamp(cameraPos.x, -freelookLimit.x, freelookLimit.x);
-        cameraPos.y = Mathf.Clamp(cameraPos.y, -freelookLimit.y, freelookLimit.y);
+        cameraPos.x = Mathf.Clamp(cameraPos.x, mapTopLeft.position.x, mapBottomRight.position.x);
+        cameraPos.y = Mathf.Clamp(cameraPos.y, mapBottomRight.position.y, mapTopLeft.position.y);
         transform.position = cameraPos;
     }
 

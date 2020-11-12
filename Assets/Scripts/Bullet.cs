@@ -10,16 +10,19 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // failed attempt :/ :D
+        //if (!collision.collider.CompareTag("River"))
+        //{
+            GameObject animation = Instantiate(collAnimation, transform.position, Quaternion.identity);
 
-        GameObject animation = Instantiate(collAnimation, transform.position, Quaternion.identity);
+            Enemy enemy = collision.collider.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                enemy.TakeDamage(Random.Range(minDmg, maxDmg));
+            }
 
-        Enemy enemy = collision.collider.GetComponent<Enemy>();
-        if(enemy != null)
-        {
-            enemy.TakeDamage(Random.Range(minDmg, maxDmg));
-        }
-
-        Destroy(animation, 1.5f);
-        Destroy(gameObject);
+            Destroy(animation, 1.5f);
+            Destroy(gameObject);
+        //}
     }
 }
