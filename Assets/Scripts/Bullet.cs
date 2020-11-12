@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] GameObject collAnimation;
-    int damage = 20;
+    int minDmg = 23;
+    int maxDmg = 27;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,7 +16,7 @@ public class Bullet : MonoBehaviour
         Enemy enemy = collision.collider.GetComponent<Enemy>();
         if(enemy != null)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(Random.Range(minDmg, maxDmg));
         }
 
         Destroy(animation, 1.5f);

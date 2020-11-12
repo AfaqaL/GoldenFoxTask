@@ -15,7 +15,7 @@ public class Player : Character
 
     private void Update()
     {
-        healthBar.transform.position = transform.position + healthOffset;
+        healthBar.Follow(transform.position + healthOffset);
     }
 
     public override void Die()

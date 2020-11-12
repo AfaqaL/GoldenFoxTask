@@ -8,7 +8,7 @@ public class EnemySpawnHandler : MonoBehaviour
     [SerializeField] EnemySpawner spawnerPref;
 
     List<EnemySpawner> spawners = new List<EnemySpawner>(6);
-    private int numWaves = 5;
+    private int numWaves = 4;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class EnemySpawnHandler : MonoBehaviour
         {
             spawners.Add(Instantiate(spawnerPref, spawner.transform.position, Quaternion.identity));
         }
-        StartCoroutine(StartSpawns(4));
+        StartCoroutine(StartSpawns(numWaves));
     }
 
     private IEnumerator StartSpawns(int waves)

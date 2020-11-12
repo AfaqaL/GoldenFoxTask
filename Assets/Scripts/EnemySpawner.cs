@@ -7,13 +7,14 @@ class EnemySpawner: MonoBehaviour
 {
     [SerializeField] Enemy enemyPref;
 
-    private int maxSpawns = 16;
+    private int maxSpawns = 7;
     private float maxSpawnRadius = 3f;
 
     List<Enemy> enemies = new List<Enemy>(16);
     List<Vector2> spawns = new List<Vector2>(16);
     private void Start()
     {
+        Random.InitState(System.DateTime.Now.Second);
         for (int i = 0; i < maxSpawns; i++)
         {
             Vector2 spawnPoint = RandomSpawnPoint();
@@ -50,14 +51,9 @@ class EnemySpawner: MonoBehaviour
         
         for(int i = 0; i < enemies.Count; i++)
         {
-            if (!enemies[i].isActiveAndEnabled && Random.Range(0, 3) == 1)
+            if (!enemies[i].isActiveAndEnabled /*&& Random.Range(0, 3) == 1*/)
             {
-                if (!enemies[i].transform.position.Equals(spawns[i]))
-                {
-                    enemies[i].transform.position = spawns[i];
-                }
-                enemies[i].gameObject.SetActive(true);
-                enemies[i].isDead = false;
+                enemies[i].Revive(spawns[i]);
             }
         }
         return true;

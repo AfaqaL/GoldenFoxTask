@@ -9,9 +9,10 @@ public class HealthBar : MonoBehaviour
     
     int maxHealth;
     int health;
-    public void SetInitial(int health)
+    public void SetInitial(int initialHealth)
     {
-        maxHealth = health;
+        health = initialHealth;
+        maxHealth = initialHealth;
     }
     public void SetHealth(int newHealth)
     {
@@ -19,5 +20,10 @@ public class HealthBar : MonoBehaviour
         Vector2 barValue = healthBar.transform.localScale;
         barValue.x = (float)health / maxHealth;
         healthBar.transform.localScale = barValue;
+    }
+
+    public void Follow(Vector2 pos)
+    {
+        transform.position = pos;
     }
 }
